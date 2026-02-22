@@ -1,7 +1,6 @@
-import { describe, it, expect, mock, beforeEach, spyOn } from "bun:test";
+import { describe, it, expect, mock, beforeEach } from "bun:test";
 import { errorHandler } from "../../src/middleware/error-handler.js";
 import { AppError } from "../../src/utils/api-response.js";
-import * as envModule from "../../src/config/env.js";
 
 function createMockResponse() {
   const res: any = {};
@@ -109,11 +108,6 @@ describe("errorHandler", () => {
 
   describe("generic Error handling", () => {
     it("should send 500 with error message in non-production", () => {
-      spyOn(envModule, "env" as any, "get").mockReturnValue({
-        ...envModule.env,
-        NODE_ENV: "development",
-      });
-
       const error = new Error("Something broke internally");
 
       errorHandler(error, req, res, next);

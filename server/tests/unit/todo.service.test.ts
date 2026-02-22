@@ -133,7 +133,7 @@ describe("TodoService", () => {
       spyOn(Todo, "findById").mockResolvedValue(mockTodo as any);
 
       const result = await service.findById("507f1f77bcf86cd799439011");
-      expect(result).toEqual(mockTodo);
+      expect(result).toEqual(mockTodo as any);
     });
 
     it("should throw AppError if todo not found", async () => {
