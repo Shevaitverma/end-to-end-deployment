@@ -41,8 +41,8 @@ const todoSchema = new Schema<ITodo>(
   {
     timestamps: true,
     toJSON: {
-      transform(_doc, ret) {
-        ret.id = ret._id.toString();
+      transform(_doc, ret: Record<string, unknown>) {
+        ret.id = (ret._id as object).toString();
         delete ret._id;
         delete ret.__v;
         return ret;

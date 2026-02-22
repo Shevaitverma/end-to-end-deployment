@@ -27,7 +27,7 @@ export function sendError(
     success: false,
     data: null,
     message,
-    ...(errors && { errors }),
+    ...(errors ? { errors } : {}),
   };
   res.status(statusCode).json(response);
 }

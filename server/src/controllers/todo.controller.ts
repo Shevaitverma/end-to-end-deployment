@@ -34,7 +34,7 @@ export class TodoController {
 
   async getById(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const todo = await todoService.findById(req.params.id);
+      const todo = await todoService.findById(req.params.id as string);
       sendSuccess(res, todo, "Todo retrieved successfully");
     } catch (error) {
       next(error);
@@ -54,7 +54,7 @@ export class TodoController {
   async update(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const body = req.body as UpdateTodoBody;
-      const todo = await todoService.update(req.params.id, body);
+      const todo = await todoService.update(req.params.id as string, body);
       sendSuccess(res, todo, "Todo updated successfully");
     } catch (error) {
       next(error);
@@ -63,7 +63,7 @@ export class TodoController {
 
   async delete(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      await todoService.delete(req.params.id);
+      await todoService.delete(req.params.id as string);
       sendSuccess(res, null, "Todo deleted successfully", 200);
     } catch (error) {
       next(error);
